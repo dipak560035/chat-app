@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
-import { Send, Users, MessageSquare, LogOut } from 'lucide-react';
+import { Send, Users, MessageSquare, LogOut, User as UserIcon } from 'lucide-react';
 
-const Chat = ({ user, setAuth }) => {
+const Chat = ({ user, setAuth, onProfileClick }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [socket, setSocket] = useState(null);
@@ -95,8 +95,16 @@ const Chat = ({ user, setAuth }) => {
             </div>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
-          <span className="text-gray-700 font-medium">Hi, {user.username}</span>
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={onProfileClick}
+            className="flex items-center space-x-2 px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors group"
+          >
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-200 transition-colors">
+              <UserIcon className="w-5 h-5" />
+            </div>
+            <span className="text-gray-700 font-medium hidden sm:block">Hi, {user.username}</span>
+          </button>
           <button
             onClick={handleLogout}
             className="p-2 text-gray-500 hover:text-red-500 transition-colors"

@@ -1,57 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Login';
 import Register from './components/Register';
 import Chat from './components/Chat';
+import Profile from './components/Profile';
 
-function App() {
-  const [auth, setAuth] = useState(null);
-  const [isLogin, setIsLogin] = useState(true);
+function AppContent() {
+  const { user, setUser, loading } = useAuth();
+  const [view, setView] = useState('login'); // login, register, chat, profile
 
-  useEffect(() => {
-    const userInfo = localStorage.getItem('userInfo');
-    if (userInfo) {
-      setAuth(JSON.parse(userInfo));
+  // Sync view with auth state
+  React.useEffect(() => {
+    if (user) {
+      if (view === 'login' || view === 'register') {
+        setView('chat');
+      }
+    } else {
+      setView('login');
     }
-  }, []);
+  }, [user]);
 
-  if (auth) {
-    return <Chat user={auth} setAuth={setAuth} />;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {isLogin ? (
-        <>
-          <Login setAuth={setAuth} />
-          <div className="text-center pb-8 -mt-16">
-            <p className="text-gray-600">
-              Don't have an account?{' '}
-              <button
-                onClick={() => setIsLogin(false)}
-                className="text-blue-600 font-bold hover:underline"
-              >
-                Register
-              </button>
-            </p>
-          </div>
-        </>
-      ) : (
-        <>
-          <Register setAuth={setAuth} />
-          <div className="text-center pb-8 -mt-16">
-            <p className="text-gray-600">
-              Already have an account?{' '}
-              <button
-                onClick={() => setIsLogin(true)}
-                className="text-blue-600 font-bold hover:underline"
-              >
-                Login
-              </button>
-            </p>
-          </div>
-        </>
+      {view === 'login' && (
+        <Login onToggleMode={() => setView('register')} />
+      )}
+      
+      {view === 'register' && (
+        <Register onToggleMode={() => setView('login')} />
+      )}
+
+      {view === 'chat' && user && (
+        <Chat 
+          user={user} 
+          setAuth={setUser} 
+          onProfileClick={() => setView('profile')} 
+        />
+      )}
+
+      {view === 'profile' && user && (
+        <Profile onBackToChat={() => setView('chat')} />
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

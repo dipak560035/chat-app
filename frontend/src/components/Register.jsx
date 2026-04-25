@@ -1,65 +1,105 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { authAPI } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
-const Register = ({ setAuth }) => {
+const Register = ({ onToggleMode }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/register', { username, email, password });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      setAuth(data);
+      const { data } = await authAPI.register({ username, email, password });
+      login(data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="p-8 bg-white shadow-md rounded-lg w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Register</h2>
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Username</label>
-          <input
-            type="text"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Create Account</h2>
+        
+        {error && (
+          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded" role="alert">
+            <p>{error}</p>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              placeholder="johndoe"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <input
+              type="email"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className={`w-full py-3 px-4 rounded-lg text-white font-semibold transition duration-200 mt-4 ${
+              isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 active:transform active:scale-95'
+            }`}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Creating Account...' : 'Register'}
+          </button>
+        </form>
+
+        <div className="mt-8 text-center border-t pt-6">
+          <p className="text-gray-600">
+            Already have an account?{' '}
+            <button
+              onClick={onToggleMode}
+              className="text-blue-600 font-bold hover:underline ml-1"
+              disabled={isLoading}
+            >
+              Login here
+            </button>
+          </p>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Email</label>
-          <input
-            type="email"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 mb-2">Password</label>
-          <input
-            type="password"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200"
-        >
-          Register
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

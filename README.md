@@ -21,9 +21,9 @@ A production-ready real-time chat application built with Node.js, Express, Mongo
 
 ```
 chat-app/
-ΓööΓöÇ backend/          # Node.js server
-ΓööΓöÇ frontend/         # React application
-ΓööΓöÇ README.md         # Documentation
+backend/          # Node.js server
+frontend/         # React application
+README.md         # Documentation
 ```
 
 ## Getting Started
