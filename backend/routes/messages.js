@@ -3,9 +3,9 @@ const router = express.Router();
 const Message = require('../models/Message');
 const { protect } = require('../middleware/authMiddleware');
 
-// @desc    Get all messages
-// @route   GET /api/messages
-// @access  Private
+//     Get all messages
+// route,   GET /api/messages
+// access,  Private
 router.get('/', protect, async (req, res) => {
   try {
     const messages = await Message.find().sort({ createdAt: 1 });

@@ -5,9 +5,9 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
-// @access  Public
+//     Register a new user
+// route,   POST /api/auth/register
+// access,  Public
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -39,9 +39,9 @@ const registerUser = async (req, res) => {
   }
 };
 
-// @desc    Authenticate a user
-// @route   POST /api/auth/login
-// @access  Public
+//     Authenticate a user
+// route,   POST /api/auth/login
+// access,  Public
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 

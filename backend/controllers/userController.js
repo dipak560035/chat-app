@@ -1,9 +1,9 @@
 const User = require('../models/User');
 const Message = require('../models/Message');
 
-// @desc    Get all users
-// @route   GET /api/users
-// @access  Private
+//     Get all users
+// route,   GET /api/users
+// access,  Private
 const getUsers = async (req, res) => {
   try {
     const users = await User.find({}).select('-password');
@@ -13,9 +13,9 @@ const getUsers = async (req, res) => {
   }
 };
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
+//     Get user profile
+// route,   GET /api/users/profile
+// access,  Private
 const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select('-password');
@@ -29,9 +29,9 @@ const getUserProfile = async (req, res) => {
   }
 };
 
-// @desc    Update user profile
-// @route   PUT /api/users/profile
-// @access  Private
+//     Update user profile
+// route,   PUT /api/users/profile
+// access,  Private
 const updateUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -58,9 +58,9 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private
+//     Delete user
+// route,   DELETE /api/users/:id
+// access,  Private
 const deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -76,9 +76,9 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// @desc    Get stats (total users and total messages)
-// @route   GET /api/users/stats
-// @access  Public (or Private)
+//     Get stats (total users and total messages)
+// route,   GET /api/users/stats
+// access,  Public (or Private)
 const getStats = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
