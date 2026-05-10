@@ -139,7 +139,7 @@ const server = http.createServer(app);
 
 const FRONTEND_URL =
   process.env.FRONTEND_URL ||
-  'https://chat-bammoocwj-dipak560035s-projects.vercel.app';
+  'https://chat-app-five-blue-45.vercel.app/';
 
 // Socket.io
 const io = new Server(server, {
