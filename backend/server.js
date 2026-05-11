@@ -137,32 +137,45 @@ const app = express();
 
 const server = http.createServer(app);
 
+;
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://chat-app-five-blue-45.vercel.app',
+];
+
 // const FRONTEND_URL =
 //   process.env.FRONTEND_URL ||
-//   'https://chat-app-five-blue-45.vercel.app/';
-
-const FRONTEND_URL =
-  process.env.FRONTEND_URL ||
-  (process.env.NODE_ENV === 'production'
-    ? 'https://chat-app-five-blue-45.vercel.app'
-    : 'http://localhost:5173');
+//   (process.env.NODE_ENV === 'production'
+//     ? 'https://chat-app-five-blue-45.vercel.app'
+//     : 'http://localhost:5173');
 
 // Socket.io
 const io = new Server(server, {
   cors: {
-    origin: FRONTEND_URL,
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true,
   },
 });
 
 // Middleware
-app.use(
-  cors({
-    origin: FRONTEND_URL,
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: FRONTEND_URL,
+//     credentials: true,
+//   })
+// );
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 
 app.use(express.json());
 

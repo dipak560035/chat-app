@@ -245,9 +245,12 @@ const Chat = ({ user, setAuth, onProfileClick }) => {
   };
 
   useEffect(() => {
+    // const newSocket = io(SOCKET_URL, {
+    //   transports: ['websocket'],
+    // });
     const newSocket = io(SOCKET_URL, {
-      transports: ['websocket'],
-    });
+  transports: ['polling', 'websocket'],
+});
 
     setSocket(newSocket);
 
