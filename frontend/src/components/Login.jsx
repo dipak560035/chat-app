@@ -26,13 +26,7 @@ const Login = ({ onToggleMode }) => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-       
-        
-        {error && (
-          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded" role="alert">
-           
-          </div>
+      
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
