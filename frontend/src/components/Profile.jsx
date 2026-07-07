@@ -110,15 +110,7 @@ const Profile = ({ onBackToChat }) => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <button
-            type="submit"
-            className={`flex-1 py-3 px-6 rounded-xl text-white font-bold transition duration-200 shadow-md ${
-              isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 hover:shadow-lg active:transform active:scale-95'
-            }`}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Saving Changes...' : 'Update Profile'}
-          </button>
+         
           
           <button
             type="button"
