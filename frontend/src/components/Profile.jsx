@@ -112,14 +112,7 @@ const Profile = ({ onBackToChat }) => {
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
          
           
-          <button
-            type="button"
-            onClick={logout}
-            className="px-6 py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-bold hover:bg-gray-50 transition duration-200"
-            disabled={isLoading}
-          >
-            Logout
-          </button>
+       
         </div>
       </form>
 
