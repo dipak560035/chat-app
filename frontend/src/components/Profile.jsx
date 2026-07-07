@@ -121,13 +121,7 @@ const Profile = ({ onBackToChat }) => {
         <p className="text-gray-500 mb-6 text-sm">
           Once you delete your account, there is no going back. Please be certain.
         </p>
-        <button
-          onClick={handleDelete}
-          className={`py-3 px-8 rounded-xl border-2 border-red-600 text-red-600 font-bold hover:bg-red-600 hover:text-white transition duration-300 ${
-            isLoading ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-          disabled={isLoading}
-        >
+       
           {isLoading ? 'Deleting Account...' : 'Delete My Account'}
         </button>
       </div>
