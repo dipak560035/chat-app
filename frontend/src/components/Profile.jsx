@@ -82,14 +82,7 @@ const Profile = ({ onBackToChat }) => {
           </div>
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-            <input
-              type="email"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-gray-50"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={isLoading}
-            />
+        
           </div>
         </div>
 
