@@ -69,11 +69,7 @@ const Profile = ({ onBackToChat }) => {
       </div>
 
       {message.text && (
-        <div className={`p-4 mb-6 rounded-lg ${
-          message.type === 'success' ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-red-100 text-red-700 border border-red-200'
-        }`}>
-          {message.text}
-        </div>
+      
       )}
 
       <form onSubmit={handleUpdate} className="space-y-6">
