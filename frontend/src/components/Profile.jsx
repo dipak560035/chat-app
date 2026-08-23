@@ -67,10 +67,7 @@ const Profile = ({ onBackToChat }) => {
 
       <form onSubmit={handleUpdate} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Username</label>
        
-          </div>
        
         </div>
 
