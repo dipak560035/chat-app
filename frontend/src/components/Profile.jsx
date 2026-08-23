@@ -59,10 +59,7 @@ const Profile = ({ onBackToChat }) => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-xl rounded-2xl my-8">
-      <div className="flex justify-between items-center mb-8 border-b pb-4">
-        <h2 className="text-3xl font-bold text-gray-800">User Profile</h2>
-       
-      </div>
+   
 
       {message.text && (
         <div className={`p-4 mb-6 rounded-lg ${
