@@ -73,14 +73,7 @@ const Profile = ({ onBackToChat }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">Username</label>
-            <input
-              type="text"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition bg-gray-50"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              disabled={isLoading}
-            />
+       
           </div>
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
