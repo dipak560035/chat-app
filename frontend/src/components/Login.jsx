@@ -51,15 +51,7 @@ const Login = ({ onToggleMode }) => {
             />
           </div>
 
-          <button
-            type="submit"
-            className={`w-full py-3 px-4 rounded-lg text-white font-semibold transition duration-200 ${
-              isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 active:transform active:scale-95'
-            }`}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Logging in...' : 'Login'}
-          </button>
+      
         </form>
 
         <div className="mt-8 text-center">
