@@ -28,7 +28,7 @@ const Register = ({ onToggleMode }) => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Create Account</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Create Accountt</h2>
         
         {error && (
           <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded" role="alert">
